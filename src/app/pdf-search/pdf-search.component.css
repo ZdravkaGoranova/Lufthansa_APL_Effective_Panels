@@ -1,0 +1,72 @@
+img {
+  width: 20%;
+  height: auto;
+}
+
+body,
+main {
+  /* width: 100vw;
+  height: 60vh; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+
+}
+
+form {
+
+  display: flex;
+
+  flex-direction: column;
+  gap: 20px;
+}
+
+p {
+  font-family: helvetica;
+  font-size: 18px;
+  text-align: left;
+  font-style: italic;
+
+  color: rgb(109, 109, 183);
+  margin: 5px;
+}
+
+.small {
+  font-family: helvetica;
+  font-size: 18px;
+  text-align: center;
+  margin: 25px;
+}
+
+button {
+  background-color: rgb(109, 109, 183);
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  font-size: 13px;
+  border-radius: 3px;
+
+}
+
+#pdf-file,
+#excel-file {
+  background-color: rgba(109, 109, 183, 0.6);
+  padding: 10px 15px;
+  color: white;
+
+}
+
+#refresh-button {
+  padding: 10px 15px;
+  background-color: #0A1D3D;
+  margin: 15px
+}
+
+h2 {
+  color: rgb(109, 109, 183);
+  margin: 0;
+  margin-bottom: 10px;
+}

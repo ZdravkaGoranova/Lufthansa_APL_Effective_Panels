@@ -1,0 +1,59 @@
+
+
+
+<main>
+
+  <img src='../../assets/Lufthansa-Logo-700x394.png' />
+
+  <h2>PDF to Excel Checker</h2>
+  
+  <form>
+    <fieldset>
+      <legend>PDF upload</legend>
+
+      <input type="file" id="pdf-file" accept=".pdf" (change)="onFileSelected($event)" required="true">
+    </fieldset>
+
+    <fieldset>
+      <legend>PDF upload</legend>
+
+      <input type="file" id="pdf-file" accept=".pdf" (change)="onFileSelected($event)" required="true">
+    </fieldset>
+
+    <fieldset>
+      <legend>Excel upload</legend>
+      <input type="file" id="excel-file" accept=".xlsx, .xls" (change)="onFileExcelUpload($event)" required="true">
+
+    </fieldset>
+
+
+    <!-- <fieldset>
+      <legend>Find Results</legend>
+      <button id="check-button" type="submit" (click)="onCheckButtonClick()">Check Results</button>
+    </fieldset> -->
+
+    <div *ngIf="pdfSrc">
+      <pdf-viewer [src]="pdfSrc"></pdf-viewer>
+    </div>
+   
+    <fieldset *ngIf="showResults">
+      <legend>Result found:</legend>
+      <p *ngIf="loadingResults"> <app-loading></app-loading></p>
+    
+      <p *ngIf="!loadingResults && commonMatches.length == 0">No matches found</p>
+      <p *ngIf="!loadingResults && commonMatches.length != 0" style="margin-top: 10px;">
+        Panels were found in the document <b>{{commonMatches.length}}</b> panels.<br>
+        A folder named: <b>Results_Of_Panels</b> has been downloaded.
+      </p>
+      <!-- <ul *ngIf="!loadingResults">
+          <li *ngFor="let result of searchResults">{{ result }}</li>
+        </ul> -->
+    </fieldset>
+  </form>
+  <div>
+
+    <button id="check-button" type="submit" (click)="onCheckButtonClick()">Check Results</button>
+    <button id="refresh-button" type="button" (click)="onRefreshClick()">Refresh</button>
+  </div>
+
+</main>
