@@ -1,0 +1,28 @@
+<!-- <div>
+   
+    <pdf-viewer [src]="pdfSrc" [show-all]="true"></pdf-viewer>
+  
+    <h2>PDF to Excel Checker</h2>
+  
+    <input type="file" id="pdf-file" accept=".pdf" (change)="onFileSelected($event)">
+    <button (click)="searchAndDisplayResults()">Търси и покажи резултати</button>
+  </div>
+  <div *ngIf="pdfSrc">
+    <pdf-viewer [src]="pdfSrc"></pdf-viewer>
+  </div>
+  
+  <h2>Намерени резултати:</h2>
+  <ul>
+    <li *ngFor="let result of searchResults">{{ result }}</li>
+  </ul>
+  <pdf-viewer [src]="pdfSrc" [show-all]="true" (after-load-complete)="onPdfLoad($event)"></pdf-viewer> -->
+
+<div>
+    <h2>PDF to Excel Checker</h2>
+
+    <input (change)="onFileSelected()" type="file" id="file">
+</div>
+<div>
+    <input type="text" [(ngModel)]="searchText">
+    <button (click)="search(searchText)">Търси</button>
+</div>
