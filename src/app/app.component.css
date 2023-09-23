@@ -1,0 +1,13 @@
+/* .pdf-viewer {
+    height: 100vh;
+    width: 80vw;
+    display: block;
+    margin: 0 auto;
+  } */
+  main {
+  background-image: url('../assets/APLFigure.jpg');
+  background-size: cover; /* За да покриете цялата площ на екрана с изображението */
+  background-repeat: no-repeat; /* За да избегнете повтарянето на изображението */
+  background-attachment: fixed; /* За фиксирано фоново изображение */
+  /* Други стилове, които искате да зададете на елемента main */
+}
