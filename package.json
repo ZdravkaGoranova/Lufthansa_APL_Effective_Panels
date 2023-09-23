@@ -24,7 +24,6 @@
     "@angular/platform-browser": "^16.2.0",
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
-  
     "electron-packager": "^17.1.2",
     "ng2-pdf-viewer": "^10.0.0",
     "pdf.js": "^0.1.0",

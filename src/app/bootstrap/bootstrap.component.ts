@@ -93,7 +93,8 @@ export class BootstrapComponent {
       return;
     }
     if (this.excelDataResults.length<=0) {
-      alert('Not loaded the file in Excel upload');
+      // alert('Not loaded the file in Excel upload');
+      this.errorMessage = 'Not loaded the file in Excel upload'
       this.loadingResults = false;
       return;
     }
@@ -123,10 +124,22 @@ export class BootstrapComponent {
     console.log(this.commonMatches);
   
     if (this.commonMatches.length > 0) {
-      const resultsMatrix = this.commonMatches.map(match => [match]);
+      // const resultsMatrix = this.commonMatches.map(match => [match]);
+      const resultsMatrix: any[][] = [['Panels', 'Result', 'Match']];
+
+
+      for (let i = 0; i < cleanedExcelDataResults.length; i++) {
+        // Изчислете MATCH формулата и добавете я към колоната C
+        const matchFormula = `=MATCH(A${i + 2}, B:B, 0)`;
+     
+        resultsMatrix.push([cleanedExcelDataResults[i], this.commonMatches[i] || '', matchFormula]);
+      }
+
       const ws = XLSX.utils.aoa_to_sheet(resultsMatrix);
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, 'Results');
+
+      // Създайте Excel файл
       XLSX.writeFile(wb, 'Effective_Panels_Mach.xlsx');
     } else {
       console.log('No common matches found.');

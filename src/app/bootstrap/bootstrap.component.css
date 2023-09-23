@@ -10,6 +10,14 @@ main {
   align-items: center;
   min-height: 100vh; /* Гарантира, че контейнера се разтяга на цялата височина на екрана */
 }
-label{
+label,.result{
   font-size: larger;
 }
+.vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
