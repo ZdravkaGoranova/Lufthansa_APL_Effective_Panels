@@ -1,0 +1,50 @@
+img {
+    width: 20%;
+    height: auto;
+}
+body,main{
+    width: 100vw;
+    height:60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+  
+  }
+  form {
+   
+    display: flex;
+
+    flex-direction: column;
+    gap:20px;
+  }
+  p {
+    font-family: helvetica;
+    font-size: 18px;
+    text-align:left;
+    font-style: italic;
+  
+    color: rgb(109, 109, 183);
+    margin: 5px;
+  }
+  
+  .small {
+    font-family: helvetica;
+    font-size: 18px;
+    text-align: center;
+    margin: 25px;
+  }
+  
+  button {
+    background-color: #0A1D3D;
+    border: none;
+    color: white;
+    padding: 5px ;
+    text-align: center;
+    font-size: 13px;
+    border-radius: 3px;
+  }
+  h2{
+    color: rgb(109, 109, 183);
+  }

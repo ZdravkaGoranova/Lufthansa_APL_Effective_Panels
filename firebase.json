@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/lufthansa-search-pdf",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
