@@ -28,8 +28,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # Routes views
 
 ## Home Page
-![](/Home.jpg)
-![](/Home1.jpg)
+![](/start.jpg)
 
-## Salon Page
-![](/Salon.jpg)
+## Validation Error
+![](/ValidationError.jpg)
+
+## Result
+![](/result.jpg)
+
+## No match
+![](/Nomatch.jpg)
