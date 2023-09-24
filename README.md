@@ -3,19 +3,17 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
 #  Angular-Project-Amigurumi
 
-"Angular-Project-Amigurumi" is a place, where you can browse some of the most popular Amigurumi  in the world and add some new product that you have created. Authenticated users can like and comment on products in the app. Sellers can use the platform to add, update and delete products from their profile page.
-
-The  "Angular-Project-Amigurumi"  application contains the following views: login page, registration page, logout page, personal profile page, catalog page and details page.
+This application is used to search for effective panels by submitted documentation of a customer of Lufthansa Technician Sofia. Upload the pdf documentation for a particular aircraft , then upload the excel with certain panels . After pressing the button submit is displayed in the result section whether there are or not matches and how many are .
 
 The front end of the project has been deploy in Firebase: [https://lufthansa-pdf.web.app/](https://lufthansa-pdf.web.app/)
 
 ## Short description
  - This project was bootstrapped with [Angular](https://github.com/facebook/angular).
  - Single Page App (SPA) 
- 
+ - Deploy in Firebase [https://lufthansa-pdf.web.app/](https://lufthansa-pdf.web.app/)
  ## Usage
 - npm i
-- ng s
+- ng serve
 
 ## Languages and libraries used
  - Javascript
