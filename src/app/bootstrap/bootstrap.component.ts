@@ -3,6 +3,8 @@ import { Component, ViewChild } from '@angular/core';
 
 import * as pdfjsLib from 'pdfjs-dist';
 import * as XLSX from 'xlsx';
+
+
 @Component({
   selector: 'app-bootstrap',
   templateUrl: './bootstrap.component.html',
@@ -16,10 +18,11 @@ export class BootstrapComponent {
 
   excelDataResults: string[] = [];
   commonMatches: string[] = [];
-  
-  showResults : boolean = false;
 
-  errorMessage : string = '';
+  showResults: boolean = false;
+
+  errorMessage: string = '';
+
 
   async onFileSelected(event: any) {
     const selectedFile = event.target.files[0];
@@ -35,7 +38,7 @@ export class BootstrapComponent {
   }
 
   async onFileExcelUpload(event: any) {
-   
+
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       const fileReader = new FileReader();
@@ -45,10 +48,10 @@ export class BootstrapComponent {
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
         const excelData = XLSX.utils.sheet_to_json(worksheet, { header: 1 }) as string[][];
-  
+
         // Преобразуване на двумерния масив в масив от стрингове
         const flatExcelData = excelData.flat().map(value => String(value));
-  
+
         console.log(flatExcelData);
 
         // this.searchText = flatExcelData;
@@ -62,7 +65,7 @@ export class BootstrapComponent {
       console.log('Failed to load Excel file.');
     }
   }
-  
+
   // Метод за зареждане на PDF файл
   async loadPdfData(file: File): Promise<string | null> {
 
@@ -78,76 +81,92 @@ export class BootstrapComponent {
     });
   }
 
-  onCheckButtonClick(){
+  onCheckButtonClick() {
     this.search();
     this.showResults = true;
   }
 
   async search() {
     this.loadingResults = true;
-  
+
     if (!this.pdfSrc) {
       // alert('Not loaded the file in PDF upload');
       this.loadingResults = false;
       this.errorMessage = 'Not loaded the file in PDF upload';
+
       return;
     }
-    if (this.excelDataResults.length<=0) {
+    if (this.excelDataResults.length <= 0) {
       // alert('Not loaded the file in Excel upload');
-      this.errorMessage = 'Not loaded the file in Excel upload'
+      this.errorMessage = 'Not loaded the file in Excel upload';
+
       this.loadingResults = false;
       return;
     }
-  
+
     const text = await this.extractTextFromPdf(this.pdfSrc);
     this.loadingResults = false;
-  
+
     // Define your regex pattern
     const regex = /\b\d\s*\d\s*\d\s*[A-Z]\s*[A-Z]\s*\b/g;
-  
+
     // Use a loop to extract and clean the matched strings
     const matchedStrings: string[] = [];
     let match;
     while ((match = regex.exec(text)) !== null) {
-  
+
       matchedStrings.push(match[0].replace(/\s/g, ''));
     }
     this.searchResults = matchedStrings.slice(1);
-   
+
     const cleanedSearchResults = this.searchResults;
     const cleanedExcelDataResults = this.excelDataResults.map(str => str.replace(/\s/g, ''));
-  
+
     // Find common matches
-     this.commonMatches = cleanedSearchResults.filter(value => cleanedExcelDataResults.includes(value));
+    this.commonMatches = cleanedSearchResults.filter(value => cleanedExcelDataResults.includes(value));
     console.log(cleanedSearchResults);
     console.log(cleanedExcelDataResults);
     console.log(this.commonMatches);
-  
+
     if (this.commonMatches.length > 0) {
       // const resultsMatrix = this.commonMatches.map(match => [match]);
       const resultsMatrix: any[][] = [['Panels', 'Result', 'Match']];
 
+      
 
       for (let i = 0; i < cleanedExcelDataResults.length; i++) {
         // Изчислете MATCH формулата и добавете я към колоната C
         const matchFormula = `=MATCH(A${i + 2}, B:B, 0)`;
-     
         resultsMatrix.push([cleanedExcelDataResults[i], this.commonMatches[i] || '', matchFormula]);
+        
+       
       }
-
+     
       const ws = XLSX.utils.aoa_to_sheet(resultsMatrix);
       const wb = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(wb, ws, 'Results');
-
-      // Създайте Excel файл
       XLSX.writeFile(wb, 'Effective_Panels_Mach.xlsx');
     } else {
       console.log('No common matches found.');
       // alert('No common matches found...');
     }
-   
+
+  }
+
+
+  saveFile(blob: Blob, fileName: string) {
+    const a = document.createElement('a');
+    document.body.appendChild(a);
+    a.style.display = 'none';
+    const url = window.URL.createObjectURL(blob);
+    a.href = url;
+    a.download = fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
   }
   
+
+
   // Метод за извличане на текст от PDF файл
   async extractTextFromPdf(pdfData: string): Promise<string> {
     const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
@@ -157,7 +176,7 @@ export class BootstrapComponent {
     for (let pageNum = 1; pageNum <= numPages; pageNum++) {
       const page = await pdf.getPage(pageNum);
       const pageText = await page.getTextContent();
-      
+
       for (const item of pageText.items) {
         // console.log(item)
         if ('str' in item) {
@@ -170,13 +189,13 @@ export class BootstrapComponent {
   }
 
   onRefreshClick() {
-   
+
     this.pdfSrc = '';
     this.searchResults = [];
     this.excelDataResults = [];
     this.commonMatches = [];
     this.showResults = false;
- 
+    this.errorMessage = '';
     const pdfFileInput = document.getElementById('pdf-file') as HTMLInputElement;
     const excelFileInput = document.getElementById('excel-file') as HTMLInputElement;
     if (pdfFileInput && excelFileInput) {
